@@ -36,7 +36,6 @@ fs.readFile(arg[2], (err, data) => {
 
     else if (arg[3] == 'decode') {
         while (i < inText.length) {
-            let iJump = 3;
             if (inText.charAt(i) != '#')
                 resStr += inText.charAt(i);
             else {
@@ -45,7 +44,7 @@ fs.readFile(arg[2], (err, data) => {
                 for (let j = 0; j < amount; j++) {
                     resStr += symbol;
                 }
-                i += iJump;
+                i += 3;
             }
         }
         fs.writeFileSync(arg[4], resStr);
