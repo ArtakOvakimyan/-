@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Hamming code</title>
+<script>
+function code(){
+	let informative = document.getElementById('inpMessage').value;
+	informative = informative.split('');
+	for(let i = 0; i < informative.length; i++) {
+		informative[i] *= 1;
+	}
+	let control = new Array();
+		control.push((informative[0] + informative[1] + informative[2])%2);
+		control.push((informative[0] + informative[1] + informative[3])%2);
+		control.push((informative[0] + informative[2] + informative[3])%2);
+	document.getElementById('codedMessage').value = informative.join('') + control.join('');
+}
+function decode(){
+	let coded = document.getElementById('codedMessage').value;
+	coded = coded.split('');
+	for(let i = 0; i < coded.length; i++) {
+		coded[i] *= 1;
+	}
+	let testValue;
+		testValue = ((coded[0] + coded[1] + coded[2] + coded[4]) % 2) * 100;
+		testValue += ((coded[0] + coded[1] + coded[3] + coded[5]) % 2) * 10;
+		testValue += ((coded[0] + coded[2] + coded[3] + coded[6]) % 2);
+	if (testValue == 0) {
+		document.getElementById('placeOfError').textContent = 'Error free';
+	}
+	else {
+		let decimalForm = parseInt(testValue, 2);
+		let numberOfBit = (testValue == 100 || testValue == 11) ? (decimalForm + 1) : (8 - decimalForm);
+		let index = numberOfBit - 1;
+		coded[index] = 1 - coded[index];
+		let errorMessage = 'Error was in ' + numberOfBit + 'th bit';
+			document.getElementById('placeOfError').textContent = errorMessage;
+			document.getElementById('decodedMessage').value = coded.join('');
+	}
+}
+</script>
+</head>
+<body>
+<h1>Hamming code</h1>
+<p> <input type='text' id='inpMessage'> Type the message </p>
+<p> <input type='button' value='code' onClick='code()'> </p>
+<p> <input type='text' id='codedMessage'> Coded message </p>
+<p> <input type='button' value='decode' onClick='decode()'> </p>
+<p> <input type='text' id='decodedMessage'> Decoded message </p>
+<p> <span id='placeOfError'> </span> </p>
+</body>
+</html>
