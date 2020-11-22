@@ -1,12 +1,11 @@
 let fs = require ('fs');
 let arg = process.argv;
-const readlineSync = require('readline-sync');
+let readline = require('readline-sync');
 
 let text = fs.readFileSync(arg[2]);
 text = text.toString();
-
 let mem = new Array();
-mem = text.split(/\s/);
+mem = text.split(/\r\n| /);
 for (let i = 0; i < mem.length; i++)
 	console.log(i, mem[i])
 
@@ -15,9 +14,8 @@ let flag = true;
 while (flag)
 	switch(mem[ip]){
 		case 'input':
-			let readline = require('readline-sync');
-			let value = readline.question("Write number");
-			mem[mem[ip+1]] = parseFloat(number);
+			let value = readline.question("Write a number");
+			mem[mem[ip+1]] = parseFloat(value);
 			ip += 2;
 			break;
 			
@@ -39,26 +37,25 @@ while (flag)
 			ip += 4;
 			break; 
 			
-		//НОД	
 		case 'findDivisor':
-				if (mem[mem[ip + 1]] > mem[mem[ip + 2]]) {
-					mem[mem[ip + 1]] -= mem[mem[ip + 2]];
-				}
-				else {
-					mem[mem[ip + 2]] -= mem[mem[ip + 1]];
-				}
-			ip += 3;
+			if (mem[mem[ip + 1]] > mem[mem[ip + 2]]) {
+				mem[mem[ip + 1]] -= mem[mem[ip + 2]];
+			}
+			else {
+				mem[mem[ip + 2]] -= mem[mem[ip + 1]];
+			}
+			ip -= 3;
 			break;
 			
 		case 'areEquel':
 			if (mem[mem[ip + 1]] != mem[mem[ip + 2]]) {
-				ip -= 3;
+				ip += 3;
 			}
 			else {
-				ip += 3;
+				ip += 6;
+			}
 			break; 
-		
-		//Факториал
+			
 		case 'isZero':
 			if (mem[mem[ip + 1]] != 0) {
 				ip += 3;
