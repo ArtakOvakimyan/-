@@ -1,27 +1,30 @@
 let fs = require ('fs');
 let arg = process.argv;
-let readline = require('readline-sync');
 
 let text = fs.readFileSync(arg[2]);
 text = text.toString();
 let mem = new Array();
 mem = text.split(/\r\n| /);
-for (let i = 0; i < mem.length; i++)
-	console.log(i, mem[i])
 
-ip = 0;
+let values = fs.readFileSync(arg[3]);
+values = values.toString();
+let numbers = new Array();
+numbers = values.split(/\r\n| /);
+
+var ind = 0;
+var ip = 0;
 let flag = true;
 while (flag)
 	switch(mem[ip]){
 		case 'input':
-			let value = readline.question("Write a number");
-			mem[mem[ip+1]] = parseFloat(value);
+			mem[mem[ip+1]] = parseInt(numbers[ind], 10);
+			console.log(mem[mem[ip + 1]]);
 			ip += 2;
+			ind++;
 			break;
 			
 		case 'set':
-			console.log('setcmd');
-			mem[mem[ip+1]] = parseFloat(mem[ip+2]);
+			mem[mem[ip+1]] = parseInt(mem[ip+2], 10);
 			ip += 3;
 			break;
 			
@@ -48,7 +51,7 @@ while (flag)
 			break;
 			
 		case 'areEquel':
-			if (mem[mem[ip + 1]] != mem[mem[ip + 2]]) {
+			if (mem[mem[ip + 1]] - mem[mem[ip + 2]] != 0) {
 				ip += 3;
 			}
 			else {
@@ -57,11 +60,11 @@ while (flag)
 			break; 
 			
 		case 'isZero':
-			if (mem[mem[ip + 1]] != 0) {
+			if (mem[mem[ip + 1]] >= 1) {
 				ip += 3;
 			}
 			else {
-				ip = parseFloat(mem[ip + 2]);
+				ip = parseInt(mem[ip + 2], 10);
 			}
 			break;
 			
@@ -76,7 +79,7 @@ while (flag)
 			break;
 			
 		case 'repeatAlgorithm':
-			ip = parseFloat(mem[ip + 1]);
+			ip = parseInt(mem[ip + 1], 10);
 			break;
 			
 		case 'exit':
