@@ -38,9 +38,6 @@ function Compare(str, substr, i){
 			flag = false;
 			break;
 		}
-		else {
-			continue;
-		}
 	}
 	return flag;
 }
