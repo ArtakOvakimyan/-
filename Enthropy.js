@@ -25,7 +25,7 @@ fs.readFile(arg[2], (err, data) => {
 		n++;
 	}
 	if (n = 1){
-		console.log(1)
+		console.log(0)
 	}
 	else{
 	for (let i in alph){
