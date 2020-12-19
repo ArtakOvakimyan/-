@@ -17,10 +17,9 @@ let stack = [];
 let result = '';
 let symbols = ['(',')','+','-','*','/','^'];
 
-WriteResult();
+WriteResult(Build());
 
-function WriteResult(){
-	var stack = Build();
+function WriteResult(stack){
 	for (i = 0;i < stack.length; i++){
 		result += stack[stack.length - i - 1];
 	}
