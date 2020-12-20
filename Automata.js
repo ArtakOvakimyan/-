@@ -42,10 +42,9 @@ function PrintTable(alph){
 }
 function FindEntries(){
 	var position = 0;
-	var alph = Alph();
-	var del = PrintTable(alph);
+	var del = PrintTable(Alph());
 	for (var i = 0; i < n; i++) {
-		if (string[i] in alph)
+		if (del[position][string[i]])
 			position = del[position][string[i]];
 		else
 			position = 0;
