@@ -115,7 +115,7 @@ function Decode(map){
 	let codedString = Encode(BuildTree()[0]);
 	for (let i = 0; i < codedString.length; i++){
 		symbols += codedString[i];
-		if (map.has(symbols) && codedString[i] != ''){
+		if (map.has(symbols)){
 			decodedString += map.get(symbols);
 			symbols = "";
 		}
