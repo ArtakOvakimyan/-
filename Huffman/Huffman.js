@@ -8,10 +8,10 @@ function Perform(){
 	WriteTable(BuildTree()[0], BuildTree()[1]);
 	switch (arg[3]){
 		case "Encode":
-			console.log("Encoded string:", Encode(BuildTree()[0], BuildTree()[1]));
+			console.log("Encoded string:", Encode(BuildTree()[0]));
 			break;
 		case "Decode":
-			console.log("Decoded string:", Decode(BuildTree()[0], BuildTree()[1]));
+			console.log("Decoded string:", Decode(BuildTree()[1]));
 			break;
 		default:
 			console.log("Unknown command");
@@ -84,7 +84,15 @@ function BuildTree(){
 				par = tree[par.parent];
 			}
 		}
-	return [tree, treeLength];
+		
+	let letterCode = new Map();
+	let codeLetter = new Map();
+	for (let i = 0; i < treeLength; i++){
+		letterCode.set(tree[i].letter, tree[i].code);
+		codeLetter.set(tree[i].code, tree[i].letter);
+	}
+	console.log(letterCode, codeLetter);
+	return [letterCode, codeLetter];
 }
 
 function WriteTable(tree, treeLength){
@@ -92,37 +100,24 @@ function WriteTable(tree, treeLength){
 		console.log(tree[i].letter + " : " + tree[i].code);
 }
 
-function Encode(tree, treeLength){
+function Encode(map){
 	let codedString = "";
 	for (let i = 0; i < text.length; i++)
 	{
-		for (let j = 0; j < treeLength; j++)
-		{
-			if (text[i] == tree[j].letter)
-			{
-				codedString += tree[j].code;
-				break;
-			}
-		}
+		codedString += map.get(text[i]);
 	}
 	return codedString;
 }
 
-function Decode(tree, treeLength){
+function Decode(map){
 	let decodedString = "";
 	let symbols = "";
-	let codedString = Encode(tree, treeLength);
-	for (let i = 0; i < codedString.length; i++)
-	{
+	let codedString = Encode(BuildTree()[0]);
+	for (let i = 0; i < codedString.length; i++){
 		symbols += codedString[i];
-		for (let j = 0; j < treeLength; j++)
-		{
-			if (symbols == tree[j].code)
-			{
-				decodedString += tree[j].letter;
-				symbols = "";
-				break;
-			}
+		if (map.has(symbols) && codedString[i] != ''){
+			decodedString += map.get(symbols);
+			symbols = "";
 		}
 	}
 	return decodedString;
