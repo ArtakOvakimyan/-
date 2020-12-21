@@ -65,19 +65,19 @@ Your brouser does not support the canvas element.
 			
             for (let i = 0; i < fieldSize; i++)
                 for (let j = 0; j < fieldSize; j++){
-					if (prevField[i][j] == 1){
-						if (NeighboursCount(i, j) == 3 || NeighboursCount(i, j) == 2)
-							field[i][j] = 1;
-						else
-							field[i][j] = 0;
-					}
-					else{
-						if (NeighboursCount(i, j) == 3)
-							field[i][j] = 1;
-						else
-							field[i][j] = 0;
-					}
-					Paint(i, j);
+			if (prevField[i][j] == 1){
+				if (NeighboursCount(i, j) == 3 || NeighboursCount(i, j) == 2)
+					field[i][j] = 1;
+				else
+					field[i][j] = 0;
+			}
+			else{
+				if (NeighboursCount(i, j) == 3)
+					field[i][j] = 1;
+			else
+				field[i][j] = 0;
+			}
+			Paint(i, j);
                 }
         }
     </script>
