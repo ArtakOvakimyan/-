@@ -1,9 +1,14 @@
+//
+// type in cmd console : node BM.js [name of file with string]
+// press enter
+// then write substring by keyboard
+//
 let fs = require('fs');
 const readlineSync = require('readline-sync');
 let arg = process.argv;
 
 let string = fs.readFileSync(arg[2], 'utf8');
-let t = readlineSync.question("Write substring: ");
+let t = readlineSync.question("Write the substring: ");
 let n = string.length;
 let m = t.length;
 
