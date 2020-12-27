@@ -8,7 +8,7 @@ const readlineSync = require('readline-sync');
 let arg = process.argv;
 
 let string = fs.readFileSync(arg[2], 'utf8');
-let t = readlineSync.question("Write the substring: ");
+let t = readlineSync.question("Write substring: ");
 let n = string.length;
 let m = t.length;
 
@@ -43,6 +43,7 @@ function Shift(N, i, l){
 		i += m;
 	else
 		i += Math.max(1, m - N[char] - l, GoodSuffix()[l]);
+		console.log(GoodSuffix()[l]);
 	return i;
 }
 
@@ -57,9 +58,8 @@ function GoodSuffix(){
 		suffix = t[i] + suffix;
 		while (j >= 0 && suffix != t.substring(j, suffix.length))
 			j--;
-		shift[suffix.length] = j;
+		shift[suffix.length] = m - j;
 		i--;
-		j = i;
 	}
 	return shift;
 }
