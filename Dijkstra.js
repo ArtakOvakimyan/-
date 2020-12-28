@@ -40,8 +40,8 @@ function Build(){
 			if (stack.length == 0 || priority[s[i]] > priority[stack[stack.length - 1]] || s[i] == '(')
 				stack.push(s[i]);
 			else if (priority[s[i]] <= priority[stack[stack.length - 1]]){
-					if (s[i] != '(')
-						result += stack[stack.length - 1];
+				if (s[i] != '(')
+					result += stack[stack.length - 1];
 
 				stack.pop();
 				stack.push(s[i]);
