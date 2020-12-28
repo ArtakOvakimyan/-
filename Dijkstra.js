@@ -37,7 +37,7 @@ function Build(){
 		if (isNaN(s[i]) && s[i] != ')')
 		{
 			Split();
-			if (stack.length == 0 || priority[s[i]] > priority[stack[stack.length - 1]] || s[i] == '(')
+			if (stack.length == 0 || priority[s[i]] > priority[stack[stack.length - 1]] || s[i] == '(' || s[i] == '^')
 				stack.push(s[i]);
 			else if (priority[s[i]] <= priority[stack[stack.length - 1]]){
 				if (s[i] != '(')
